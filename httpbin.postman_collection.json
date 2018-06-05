@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "ed87bd48-8d80-4996-ae0d-b24a561ff3c5",
+		"name": "httpbin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f0203f53-2386-4875-a4cc-5a6ff431c4d5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"10\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"number\": 10,\n\t\"string\": \"test\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/post",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "420d8159-ba2c-48e3-959d-681729aa1e93",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response has a \" + pm.globals.get(\"uuid\"), function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.args.data).to.eql(pm.globals.get(\"uuid\"));",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9a31271e-e9cf-4b3e-a97f-a21896325a68",
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest(pm.environment.get('url')+'/uuid', function (err, response) {",
+							"    pm.globals.set(\"uuid\", response.json().uuid);",
+							"});",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/get?data={{uuid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "data",
+							"value": "{{uuid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
