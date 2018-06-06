@@ -2,10 +2,6 @@ version: "3"
 services:
   newman:
     image: postman/newman_ubuntu1404
-    links:
-      - httpbin
-    depends_on:
-      - httpbin
     volumes: 
       - "~/depot/postman:/etc/newman"
     entrypoint: /bin/bash
@@ -15,4 +11,4 @@ services:
   httpbin: 
     image: kennethreitz/httpbin
     ports: 
-      - "8080:8080"
+      - "80:8080"
