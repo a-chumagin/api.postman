@@ -1,6 +1,9 @@
 # api.postman
 Kazan Expert Fridays Meetups
 
+# video 
+https://youtu.be/woB6yiX-Ll8
+
 # SUT
 - web: http://httpbin.org/
 - local (httpbin): http://0.0.0.0:8080
