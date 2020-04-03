@@ -6,7 +6,7 @@ https://youtu.be/woB6yiX-Ll8
 
 # SUT
 - web: http://httpbin.org/
-- local (httpbin): http://0.0.0.0:8080
+- local (httpbin): http://0.0.0.0:80
    - https://hub.docker.com/r/kennethreitz/httpbin/
    - Pull docker `docker pull kennethreitz/httpbin`
    - Run docker `docker run -p 80:8080 kennethreitz/httpbin`
